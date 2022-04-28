@@ -6,8 +6,11 @@ const morgan = require("morgan");
 const layout = require("./views/layout");
 
 const { db } = require("./models");
-
+const userRouter = require("./routes/users");
 const app = express();
+
+app.use("/wiki", require("./routes/wiki"));
+
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + "/public"));
