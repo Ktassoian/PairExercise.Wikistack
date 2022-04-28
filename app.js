@@ -18,9 +18,13 @@ app.get("/", (req, res, next) => res.send(layout("")));
 db.authenticate().then(() => {
   console.log("connected to the database HELLO");
 });
+const init = async () => {
+  await db.sync({ force: true });
+  const PORT = 3000; //might need to change for psql
 
-const PORT = 3000; //might need to change for psql
+  app.listen(PORT, () => {
+    console.log(`App listening in port ${PORT}`);
+  });
+};
 
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
+init();
